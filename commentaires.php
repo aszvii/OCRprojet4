@@ -42,11 +42,15 @@
 			$reponse->execute(array($_GET['billet']));
 			$donnees=$reponse->fetch();
 
+			//si l'id du billet demandé existe, on affiche la page
+			if(!empty($donnees))
+			{
 
 			echo 	'<div id="news">'.
-			   		'<h3>'. htmlspecialchars($donnees['titre']). 'le' .($donnees['date_creation_fr']). '</h3>
+			   		'<h3>'. htmlspecialchars($donnees['titre']). ' le ' .($donnees['date_creation_fr']). '</h3>
 				 	<p>'. htmlspecialchars($donnees['contenu']). '</p>'.
 				 	'</div>';
+
 
 			echo '<h2>Commentaires</h2>';
 
@@ -84,8 +88,16 @@
 					<label for="pseudo">pseudo</label><input type="text" name="pseudo" id="pseudo" /><br/>
 					<textarea name="message" id="message" rows="10" cols="50">tapez votre commentaire</textarea><br/>
 					<input type="submit" name="envoyer" />
-				</p>'
+				</p>';
+			}
 
+			//sinon on alerte le visiteur d'une erreur
+			else{
+				echo 'IMPOSSIBLE D\'AFFICHER LA PAGE DEMANDEE';
+			}
+		
+
+			
 			?>
 
 		</body>
