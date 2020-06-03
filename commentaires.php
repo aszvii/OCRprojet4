@@ -64,16 +64,29 @@
 			while($donnees=$reponse->fetch()){
 
 					echo '<p><strong>'.htmlspecialchars($donnees['auteur']) .'</strong>'. ' le '. $donnees['date_commentaire_fr'].'</p>'.
-					'<p>'.htmlspecialchars(($donnees["commentaire"])).'</p>';
+					'<p class="commentsContents">'.htmlspecialchars(($donnees["commentaire"])).'</p>';
 						
 			}
 
 			echo '</div>';
 
+
 			$reponse->closeCursor();
 
-			?>
 
+
+
+			echo '<form method="post" action="commentaires_post.php?billet='.$_GET['billet'].'">
+
+				<p id="title">Ajouter un commentaire</p>
+
+				<p>
+					<label for="pseudo">pseudo</label><input type="text" name="pseudo" id="pseudo" /><br/>
+					<textarea name="message" id="message" rows="10" cols="50">tapez votre commentaire</textarea><br/>
+					<input type="submit" name="envoyer" />
+				</p>'
+
+			?>
 
 		</body>
 
