@@ -1,30 +1,57 @@
 <?php
 
-require('model/frontend.php');
+require_once('model/PostManager.php');
+require_once('model/CommentManager.php');
+
 
 function listPosts(){
-	$req=getPosts();
 
-	require('view/Frontend/listPostsView.php');
+	$postManager = new \OCR\Blog\Model\PostManager();
+
+	$req=$postManager->getPosts();
+
+	if($req ===false){
+		throw new Exception ('Impossible d\'afficher les billets');
+	}
+	else{
+
+		require('view/Frontend/listPostsView.php');
+	}
 }
 
 
 function post(){
 
-	$req= getPost($_GET['id']);
-	$comments= getComments($_GET['id']);
+	$postManager= new \OCR\Blog\Model\PostManager();
+
+	$commentManager= new \OCR\Blog\Model\CommentManager();
+
+	$req= $postManager->getPost($_GET['id']);
 
 
-	require('view/Frontend/postView.php');
+	$comments= $commentManager->getComments($_GET['id']);
+
+	if($req===false || $comments===false){
+		throw new Exception('Impossible d\'afficher la page');	
+	}
+	else if($req->rowCount()==0){
+		throw new Exception('L\'id envoyé est incorrect');
+	}
+	else {
+		require('view/Frontend/postView.php');
+	}
+	
 }
 
 
 function addComment($postId, $author, $comment){
 
-	$req = postComment($postId, $author, $comment);
+	$commentManager=new  \OCR\Blog\Model\CommentManager();
+
+	$req = $commentManager->postComment($postId, $author, $comment);
 
 	if($req === false){
-		die('Impossible d\'ajouter le commentaire !');
+		throw new Exception ('Impossible d\'ajouter le commentaire !');
 	}
 	else{
 		header('Location: index.php?action=post&id='. $postId);

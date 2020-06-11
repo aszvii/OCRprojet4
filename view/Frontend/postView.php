@@ -12,12 +12,6 @@
 	<p><a href="index.php">Retour à la liste des billets</a></p>
 
 
-	<?php 
-
-		if(!empty($post))
-		{
-
-	?>
 
 
 			<div class="news">
@@ -53,25 +47,24 @@
             
 
     <?php
+        if($comments->rowCount()==0){
+            echo 'Soyez le premier à commenter cet article';
+        }
+        else{
+
         	while ($comment = $comments->fetch())
         	{
+
     ?>
 
-            	<p><strong><?php echo htmlspecialchars($comment['author']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?></p>
+            	<p><strong><?php echo htmlspecialchars($comment['author']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?><a href="">(modifier)</a></p>
             	<p><?php echo htmlspecialchars($comment['comment']); ?></p>
 
    	<?php
         	}
+        }
    	?>
 
-    <?php 
-		}
-        else
-        {
-        	echo 'Aucun billet ne correspond à cet ID';
-       	}
-
-    ?>
 
     
     <?php $content=ob_get_clean(); ?>
