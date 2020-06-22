@@ -27,12 +27,11 @@
 
         	<h2>Commentaires</h2>
 
-            <form method="post" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>">
+            <?php 
+            if(isset($_SESSION['pseudo'])){
+            ?>
 
-                <div>
-                    <label for="author">Auteur</label><br/>
-                    <input type="text" id="author" name="author">
-                </div>
+            <form method="post" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>">
 
                 <div>
                     <label for="comment">Commentaire</label><br/>
@@ -44,7 +43,9 @@
                 </div>
 
             </form>
-            
+           <?php
+           }
+           ?> 
 
     <?php
         if($comments->rowCount()==0){
@@ -57,7 +58,31 @@
 
     ?>
 
-            	<p><strong><?php echo htmlspecialchars($comment['author']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?><a href="">(modifier)</a></p>
+            	<p><strong><?php echo htmlspecialchars($comment['author']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?>
+    <?php 
+        if(isset($_SESSION['id'])){
+    ?>
+                <a href="index.php?action=signalComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(signaler)</a>
+    <?php
+        }
+    ?>
+
+    <?php
+        if(isset($_SESSION['pseudo']) && $_SESSION['pseudo']==$comment['author']){
+    ?>        
+                <a href="index.php?action=modifyComment&id=<?= $comment['id']?>&post=<?=$post['id']?>&comment=<?=$comment['comment']?>">(Modifier)</a>
+    <?php     
+        }
+    ?>
+
+    <?php
+        if(isset($_SESSION['id']) && $_SESSION['type']==1){
+    ?>
+                <a href="index.php?action=deleteComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(Supprimer)</a>
+    <?php
+        }
+    ?>
+
             	<p><?php echo htmlspecialchars($comment['comment']); ?></p>
 
    	<?php

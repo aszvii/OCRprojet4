@@ -12,7 +12,7 @@ class PostManager extends Manager
 		
 		$db=$this->dbConnect();
 
-		$req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM billets ORDER BY creation_date DESC LIMIT 0,5');
+		$req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts ORDER BY creation_date DESC LIMIT 0,5');
 
 		return $req;
 	}
@@ -22,10 +22,34 @@ class PostManager extends Manager
 
 		$db=$this->dbConnect();
 
-		$req= $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM billets WHERE id=?');
+		$req= $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts WHERE id=?');
 		$req->execute(array($postId));
 	
 		return $req;
+	}
+
+
+
+	public function addPost($postTitle, $postContent){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('INSERT INTO posts (title, content, creation_date) VALUES (?, ?, NOW())');
+		$req->execute(array($postTitle, $postContent));
+
+		return $req;
+	}
+
+
+	public function deletePost($postId){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('DELETE FROM posts WHERE id=?');
+		$req->execute(array($postId));
+
+		return $req;
+
 	}
 
 }

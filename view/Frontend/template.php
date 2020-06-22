@@ -23,6 +23,25 @@
 
 		<body>
 
+			<header>
+				<?php 
+
+				if(isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
+				?>
+					<p>Bonjour <?= $_SESSION['pseudo'];?> (<a href="index.php?action=disconnect">se déconnecter</a>)</p>
+				<?php
+				}
+				else{
+				?>
+
+					<p><a href="index.php?action=connect">Se connecter</a></p>
+					<p><a href="index.php?action=register">S'inscrire</a></p>
+
+				<?php
+				}
+				?>
+			</header>
+
 			<?= $content ?>
 
 		</body>
