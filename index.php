@@ -30,13 +30,25 @@ try{
 
 
 		elseif($_GET['action']=='addPost'){
-			require('view/Backend/addPostView.php');
+			require('view/Backend/addPostView.php'); //mettre dans une fonction
 		}
 
 
 		elseif($_GET['action']=='addPosted'){
 			if(!empty($_POST['title']) && !empty($_POST['article'])){
 				addNewPost($_POST['title'], $_POST['article']);
+			}
+		}
+
+
+		elseif($_GET['action']=='modifyPostPage'){
+			require('view/Backend/modifPostView.php'); //mettre dans fonction
+		}
+
+
+		elseif($_GET['action']=='modifyPost'){
+			if(!empty($_POST['title']) && !empty($_POST['article'])){
+				modifPost($_POST['title'], $_POST['article']);
 			}
 		}
 
@@ -50,7 +62,7 @@ try{
 
 			if(isset($_GET['id']) && ($_GET['id']>0)){
 				if(!empty($_POST['comment'])){
-				addComment($_GET['id'], $_SESSION['pseudo'], $_POST['comment']);
+				addComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
 				}
 				else{
 					throw new Exception ('Tous les champs doivent être remplis');
@@ -63,24 +75,24 @@ try{
 
 
 		elseif($_GET['action']=='signalComment'){
-				signalCom();
+			signalCom();
 		}
 
 
-		elseif($_GET['action']=='modifyComment'){
-			modifyCommentPage();
-		}
-
-
-		elseif($_GET['action']=='modifiedComment'){
-
-			modifComment($_POST['comment']);
+		elseif($_GET['action']=='showSignalComment'){
+			showSignal();
 		}
 
 
 		elseif($_GET['action']=='deleteComment'){
 
 			deleteCom();
+		}
+
+
+		elseif($_GET['action']=='cancelSignal'){
+
+			cancelSignal();
 		}
 
 
@@ -127,6 +139,15 @@ try{
 			else{
 				throw new Exception ('Veuillez remplir tous les champs');
 			}
+		}
+
+
+		elseif($_GET['action']=='admin'){
+			admin();
+		}
+
+		elseif($_GET['action']=='adminPost'){
+			listPostsAdmin();
 		}
 
 	}

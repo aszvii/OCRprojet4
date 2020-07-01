@@ -41,6 +41,18 @@ class PostManager extends Manager
 	}
 
 
+	public function modifyPost($newPostTitle, $newPostContent, $postId){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('UPDATE posts SET title=?, content=? WHERE id=? ');
+		$req->execute(array($newPostTitle, $newPostContent, $postId));
+
+
+		return $req;
+	}
+
+
 	public function deletePost($postId){
 
 		$db=$this->dbConnect();

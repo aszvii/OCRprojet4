@@ -24,6 +24,21 @@ function listPosts(){
 }
 
 
+function listPostsAdmin(){
+
+	$postManager = new \OCR\Blog\Model\PostManager();
+
+	$req=$postManager->getPosts();
+
+	if($req ==false){
+		throw new Exception ('Impossible d\'afficher les billets');
+	}
+	else{
+		require('view/Backend/adminPostView.php');
+	}
+}
+
+
 function post(){
 
 	$postManager= new \OCR\Blog\Model\PostManager();
@@ -60,6 +75,22 @@ function addNewPost($postTitle, $postContent){
 	else{
 		header('Location: index.php');
 	}
+}
+
+
+function modifPost($newPostTitle, $newPostContent){
+
+	$postManager= new \OCR\Blog\Model\PostManager();
+
+	$req= $postManager->modifyPost($newPostTitle, $newPostContent, $_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de modifier le billet');	
+	}
+	else{
+		header('Location: index.php');
+	}
+
 }
 
 
@@ -123,6 +154,37 @@ function signalCom(){
 }
 
 
+function cancelSignal(){
+
+	$commentManager= new \OCR\Blog\Model\CommentManager();
+
+	$req= $commentManager->cancelSignal($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de retirer le signalement');
+	}
+	else{
+		header('Location: index.php?action=showSignalComment');
+	}
+}
+
+
+function showSignal(){
+
+	$commentManager= new \OCR\Blog\Model\CommentManager();
+
+	$req= $commentManager->showSignalComment();
+
+	if($req==false){
+		throw new Exception('Impossible d\'afficher les commentaires signalés');		
+	}
+	else{
+		require('view/Backend/signalComView.php');
+
+	}
+}
+
+
 
 function deleteCom(){
 
@@ -134,7 +196,13 @@ function deleteCom(){
 		throw new Exception('Impossible de supprimer le commentaire');
 	}
 	else{
-		header('Location: index.php?action=post&id='. $_GET['post']);
+		if($_GET['action']=='post'){
+
+			header('Location: index.php?action=post&id='. $_GET['post']);
+		}
+		else{
+			header('Location: index.php?action=showSignalComment');
+		}
 	}
 }
 
@@ -213,4 +281,9 @@ function disconnect(){
 	session_destroy();						
 
 	header('Location: index.php');
+}
+
+
+function admin(){
+	require('view/Backend/adminView.php');
 }

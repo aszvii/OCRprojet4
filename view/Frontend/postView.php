@@ -7,8 +7,6 @@
 
 <?php ob_start(); ?>
 
-	<h1>Mon Super Blog</h1>
-
 	<p><a href="index.php">Retour à la liste des billets</a></p>
 
 
@@ -58,7 +56,7 @@
 
     ?>
 
-            	<p><strong><?php echo htmlspecialchars($comment['author']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?>
+            	<p><strong><?php echo htmlspecialchars($comment['name']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?>
     <?php 
         if(isset($_SESSION['id'])){
     ?>
@@ -67,13 +65,6 @@
         }
     ?>
 
-    <?php
-        if(isset($_SESSION['pseudo']) && $_SESSION['pseudo']==$comment['author']){
-    ?>        
-                <a href="index.php?action=modifyComment&id=<?= $comment['id']?>&post=<?=$post['id']?>&comment=<?=$comment['comment']?>">(Modifier)</a>
-    <?php     
-        }
-    ?>
 
     <?php
         if(isset($_SESSION['id']) && $_SESSION['type']==1){

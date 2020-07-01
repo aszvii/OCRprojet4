@@ -2,16 +2,35 @@
 
 <?php ob_start(); ?>
 
-<div>
-	<h1>Saisissez vos identifiants de connexion</h1>
-</div>
+<section id="connectionDiv">
 
-<form method="post" action="index.php?action=connection">
-	<label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo">
-	<label for="password">Mot de passe</label><input type="password" id="password" name="password">
-	<input type="submit" value="Se connecter">
-</form>
+	<div id="imgConnectionSlider">
+		<img src="public/CSS/IMG/imgSlider.png">
+	</div>
 
+	
+		<div id="textConnectionSlider">
+
+			<div id="connectionSpace">
+				<div>
+					<h1>Saisissez vos identifiants de connexion</h1>
+				</div>
+
+				<form method="post" action="index.php?action=connection">
+					<div id="connectionId">
+						<label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo">
+						<label for="password">Mot de passe</label><input type="password" id="password" name="password">
+					</div>
+					<div id="connectionButton">
+						<input type="submit" value="Se connecter">
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</section>
 <?php $content= ob_get_clean(); ?>
 
-<?php require ('template.php'); ?>
+<?php require ('view/Backend/template2.php'); ?>
