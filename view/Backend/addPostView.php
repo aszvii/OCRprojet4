@@ -4,10 +4,10 @@
 
 <section id="addModifPostDiv">
 
-    <p><a href="index.php">Retour à l'accueil</a></p>
-    <p><a href="index.php?action=admin">Retour à la page d'administration</a></p>
+    <p class="returnLink"><a href="index.php">Retour à l'accueil</a></p>
+    <p class="returnLink"><a href="index.php?action=admin">Retour à la page d'administration</a></p>
 
-    <div>
+    <div id=addModifTitle>
 	   <h1>Ajouter un billet</h1>
     </div>
 
@@ -26,29 +26,6 @@
 
 </section>
 
-<script type="text/javascript" src="tinymce/tinymce.js"></script>
-<script type="text/javascript">
-	   console.log("hello");
-    tinyMCE.init({
-        // type de mode
-        mode : "standards", 
-        // id ou class, des textareas appelés
-        elements : "article", 
-        // en mode avancé, cela permet de choisir les plugins
-        theme : "advanced", 
-        // langue
-        language : "fr", 
-        // liste des plugins
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,sup,forecolor,separator,"
-        + "justifyleft,justifycenter,justifyright,justifyfull,formatselect,"
-        + "bullist,numlist,outdent,indent,separator,cleanup,|,undo,redo,|,",
-        theme_advanced_buttons2 : "",
-        theme_advanced_buttons3 : "",
-        height:"250px",
-        width:"600px"
-    });
-</script>
 
 <?php $content= ob_get_clean(); ?>
 

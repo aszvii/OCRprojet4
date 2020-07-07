@@ -2,10 +2,12 @@
 
 <?php ob_start(); ?>
 
+<?php $post=$article->fetch(); ?>
+
 <section id="addModifPostDiv">
 
-	<p><a href="index.php">Retour à l'accueil</a></p>
-	<p><a href="index.php?action=admin">Retour à la page d'administration</a></p>
+	<p class="returnLink"><a href="index.php">Retour à l'accueil</a></p>
+	<p class="returnLink"><a href="index.php?action=admin">Retour à la page d'administration</a></p>
 
 	<div>
 		<h1>Modifier un billet</h1>
@@ -13,11 +15,11 @@
 
 	<form method="post" action="index.php?action=modifyPost&id=<?=$_GET['id']?>">
 		<div>
-			<label for="title">Titre</label><input type="text" id="title" name="title">
+			<label for="title">Titre</label><input type="text" id="title" name="title" value="<?=$post['title']?>">
 		</div>
 
 		<div>
-			<label for="article">Article</label><textarea  cols=50 rows=10 id="article" name="article"></textarea>
+			<label for="article">Article</label><textarea  cols=50 rows=10 id="article" name="article"><?=$post['content']?></textarea>
 		</div>
 
 		<input type="submit" value="Modifier">

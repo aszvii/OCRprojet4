@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-	<html lang="fr">
+	<html id="errorHtml" lang="fr">
 
 
 		<head>
@@ -33,46 +33,14 @@
 		</head>
 
 
-		<body>
+		<body id="errorBody">
 
-			<header>
+			<a class="returnLink" href="index.php">Retour à l'accueil</a>
+		
 
-				<div id="divFixedMenu">
+			<img src='public/CSS/IMG/errorImg.png'/>
 
-					<div id="bookTitle">
-						<h2><a href="index.php">Billet Simple pour l'Alaska</a></h2>
-					</div>
-
-					<div>
-						
-					<?php 
-
-					if(isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
-					?>
-						<p id="helloMember">Bonjour <em><?= $_SESSION['pseudo'];?></em> (<a id="logOutButton" href="index.php?action=disconnect">se déconnecter</a>)</p>
-					<?php
-
-						if($_SESSION['type']==1){
-					?>
-							<p><a id="adminLinkButton" href="index.php?action=admin">Administration</a></p>
-					<?php
-						}
-					}
-					else{
-					?>
-
-						<p><a href="index.php?action=connect">Se connecter</a></p>
-						<p><a href="index.php?action=register">S'inscrire</a></p>
-
-					<?php
-					}
-					?>
-					</div>
-				</div>
-
-			</header>
-
-			<?= $content ?>
+			<p><em><?= 'ERREUR: '?></em><?= $e->getMessage(); ?></p>
 
 
 		</body>

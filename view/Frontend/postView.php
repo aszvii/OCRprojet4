@@ -7,44 +7,46 @@
 
 <?php ob_start(); ?>
 
-	<p><a href="index.php">Retour à la liste des billets</a></p>
+	<section id="postDiv">
+        <p class="returnLink"><a href="index.php">Retour à la liste des billets</a></p>
 
 
 
 
 			<div class="news">
-            	<h3>
-                	<?php echo htmlspecialchars($post['title']); ?>
-               		<em>le <?php echo $post['date_creation_fr']; ?></em>
-            	</h3>
+            	   <h3>
+                	   <?php echo htmlspecialchars($post['title']); ?>
+               		   <em>le <?php echo $post['date_creation_fr']; ?></em>
+            	   </h3>
             
-            	<p>
-                	<?php echo htmlspecialchars($post['content']); ?>
-            	</p>
+            	    <div id="newsPara">
+                        <p><?php echo $post['content']; ?></p>
+                    </div>
         	</div>
 
-        	<h2>Commentaires</h2>
+            <div id="postCommentDiv">
+        	   <h2>Commentaires</h2>
 
             <?php 
             if(isset($_SESSION['pseudo'])){
             ?>
 
-            <form method="post" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>">
+                <form method="post" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>">
 
-                <div>
-                    <label for="comment">Commentaire</label><br/>
-                    <textarea id="comment" name="comment"></textarea>
-                </div>
+                    <div>
+                        <label for="comment">Laissez votre commentaire</label><br/>
+                        <textarea id="comment" name="comment"></textarea>
+                    </div>
 
-                <div>
-                    <input type="submit" value="Envoyer">
-                </div>
+                    <div>
+                        <input type="submit" value="Envoyer">
+                    </div>
 
-            </form>
+                </form>
            <?php
            }
            ?> 
-
+                    <div id="postCommentsContent">
     <?php
         if($comments->rowCount()==0){
             echo 'Soyez le premier à commenter cet article';
@@ -56,11 +58,13 @@
 
     ?>
 
-            	<p><strong><?php echo htmlspecialchars($comment['name']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?>
+            	    
+                        <div id="commentContent">
+                            <p><strong><?php echo htmlspecialchars($comment['name']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?>
     <?php 
         if(isset($_SESSION['id'])){
     ?>
-                <a href="index.php?action=signalComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(signaler)</a>
+                            <a id="signalLink" href="index.php?action=signalComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(signaler)</a>
     <?php
         }
     ?>
@@ -69,19 +73,25 @@
     <?php
         if(isset($_SESSION['id']) && $_SESSION['type']==1){
     ?>
-                <a href="index.php?action=deleteComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(Supprimer)</a>
+                            <a id="deleteLink" href="index.php?action=deleteComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(Supprimer)</a>
     <?php
         }
     ?>
 
-            	<p><?php echo htmlspecialchars($comment['comment']); ?></p>
+            	           <p><?php echo htmlspecialchars($comment['comment']); ?></p></p>
 
+                        </div>
+
+                
    	<?php
         	}
         }
+
    	?>
 
-
+                     </div>
+            </div>
+    </section>
     
     <?php $content=ob_get_clean(); ?>
 

@@ -30,7 +30,13 @@ try{
 
 
 		elseif($_GET['action']=='addPost'){
-			require('view/Backend/addPostView.php'); //mettre dans une fonction
+			if($_SESSION['type']==1){
+				addPostPage();
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour accéder à cette rubrique');
+				
+			}
 		}
 
 
@@ -38,61 +44,153 @@ try{
 			if(!empty($_POST['title']) && !empty($_POST['article'])){
 				addNewPost($_POST['title'], $_POST['article']);
 			}
+			else{
+				throw new Exception('Veuillez remplir tous les champs pour ajouter un article');
+				
+			}
 		}
 
 
 		elseif($_GET['action']=='modifyPostPage'){
-			require('view/Backend/modifPostView.php'); //mettre dans fonction
+			if($_SESSION['type']==1){
+				if(isset($_GET['id']) && $_GET['id']>0){
+					modifPostPage();
+				}
+				else{
+					throw new Exception('Aucun id d\'article à modifier n\'a été envoyé');	
+				}
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour accéder à cette rubrique');
+				
+			}
 		}
 
 
 		elseif($_GET['action']=='modifyPost'){
-			if(!empty($_POST['title']) && !empty($_POST['article'])){
+			if(!empty($_POST['title']) && !empty($_POST['article']) && isset($_GET['id'])){
 				modifPost($_POST['title'], $_POST['article']);
 			}
 		}
 
 
 		elseif($_GET['action']=='deletePost'){
-			deletePost();
+			if($_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					deletePost();
+				}
+			}
+			else{
+				throw new Exception('action non autorisée');	
+			}
+		}
+
+
+
+		elseif($_GET['action']=='deletePostAdmin'){
+			if($_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					deletePostAdmin();
+				}
+			}
+			else{
+				throw new Exception('action non autorisée');	
+			}
 		}
 
 
 		elseif($_GET['action']=='addComment'){
-
-			if(isset($_GET['id']) && ($_GET['id']>0)){
-				if(!empty($_POST['comment'])){
-				addComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
+			if(isset($_SESSION['id'])){
+				if(isset($_GET['id']) && ($_GET['id']>0)){
+					if(!empty($_POST['comment'])){
+						addComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
+					}
+					else{
+						throw new Exception ('Tous les champs doivent être remplis');
+					}
 				}
 				else{
-					throw new Exception ('Tous les champs doivent être remplis');
+					throw new Exception ('Aucun identifiant de  billet envoyés');
 				}
 			}
 			else{
-				throw new Exception ('Aucun identifiant de  billet envoyés');
+				throw new Exception('action non autorisée');
+				
 			}
+
 		}
 
 
 		elseif($_GET['action']=='signalComment'){
-			signalCom();
+			if(isset($_SESSION['id'])){
+				if(isset($_GET['id'])){
+					signalCom();
+				}
+				else{
+					throw new Exception('Aucun commentaire à signaler');
+				}
+			}
+			else {
+				throw new Exception('action non autorisée');
+			}
+			
 		}
 
 
 		elseif($_GET['action']=='showSignalComment'){
-			showSignal();
+			if($_SESSION['type']==1){
+				showSignal();
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits poru accéder à cette rubrique');
+			}
 		}
 
 
 		elseif($_GET['action']=='deleteComment'){
+			if($_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					deleteCom();
+				}
+				else{
+					throw new Exception('Aucun commentaire sélectionné');
+				}
+			}
+			else {
+				throw new Exception('action non autorisée');
+			}
+			
+		}
 
-			deleteCom();
+
+
+		elseif($_GET['action']=='deleteCommentAdmin'){
+			if($_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					deleteComAdmin();
+				}
+				else{
+					throw new Exception('Aucun commentaire sélectionné');
+				}
+			}
+			else {
+				throw new Exception('action non autorisée');
+			}
 		}
 
 
 		elseif($_GET['action']=='cancelSignal'){
-
-			cancelSignal();
+			if($_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					cancelSignal();
+				}
+				else{
+					throw new Exception('Aucun commentaire selectionné');
+				}
+			}
+			else{
+				throw new Exception('action non autorisée');
+			}
 		}
 
 
@@ -143,11 +241,21 @@ try{
 
 
 		elseif($_GET['action']=='admin'){
-			admin();
+			if($_SESSION['type']==1){
+				admin();
+			}
+			else{
+				throw new Exception('vous n\'avez pas droits pour accéder à cette rubrique');
+			}
 		}
 
 		elseif($_GET['action']=='adminPost'){
-			listPostsAdmin();
+			if($_SESSION['type']==1){
+				listPostsAdmin();
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour accéder à cette rubrique');
+			}
 		}
 
 	}
@@ -162,5 +270,6 @@ try{
 
 catch(Exception $e){
 
-	echo 'Erreur: ' . $e->getMessage();
+	//echo 'Erreur: ' . $e->getMessage();
+	require('view/Frontend/templateError.php');
 }

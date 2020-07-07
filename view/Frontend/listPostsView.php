@@ -3,7 +3,7 @@
 
 <?php ob_start(); ?>
 
-<section id="listPostDiv">
+<section id="listPostsDiv">
 	<h1> Billet Simple pour l'Alaska</h1>
 
 
@@ -14,29 +14,31 @@ while($data=$req->fetch())
 ?>
 
 		<div class="news">
-			<h3>
-				<?= htmlspecialchars($data['title']); ?>
-				<em>le <?= $data['date_creation_fr']; ?></em>
-			</h3>
+			<a href="index.php?action=post&id=<?=$data['id']?>">
+				<h3>
+					<?= htmlspecialchars($data['title']); ?>
+					<em>le <?= $data['date_creation_fr']; ?></em>
+				</h3>
+			</a>
 
 
-			<p>
-				<?= nl2br(htmlspecialchars($data['content'])); ?>
-				<br/>
-				<em><a href="index.php?action=post&id=<?=$data['id']?>">Commentaires</a></em>
+			<div id="newsPara">
+				<p><?=$postManager->cut($data['content'], $data['id']);?></p>
+				
+				<p><em><a href="index.php?action=post&id=<?=$data['id']?>">Commenter</a></em>
 
 <?php 		if(isset($_SESSION) && isset($_SESSION['type'])){
 				if($_SESSION['type']==1){
 
-?>					<em><a href="index.php?action=modifyPostPage&id=<?=$data['id']?>">Modifier</a></em>
-					<em id="deleteCom"><a href="index.php?action=deletePost&id=<?=$data['id']?>">Supprimer</a></em>
+?>					<em><a id="modifLink" href="index.php?action=modifyPostPage&id=<?=$data['id']?>">Modifier</a></em>
+					<em><a id="deleteLink" href="index.php?action=deletePost&id=<?=$data['id']?>">Supprimer</a></em></p>
 <?php
 				}
 			}
 ?>
 
 
-			</p>
+			</div>
 
 		</div>
 <?php	
@@ -51,7 +53,7 @@ $req->closeCursor();
 
 	?>
 
-	<p><a id="addPostLink" href="index.php?action=addPost">Ajouter un billet</a></p>
+	<p id="addPostLink"><a href="index.php?action=addPost">Ajouter un billet</a></p>
 <?php
 }
 }

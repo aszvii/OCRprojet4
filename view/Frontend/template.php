@@ -43,12 +43,12 @@
 
 					if(isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 					?>
-						<p>Bonjour <?= $_SESSION['pseudo'];?> (<a href="index.php?action=disconnect">se déconnecter</a>)</p>
+						<p id="helloMember">Bonjour <em><?= $_SESSION['pseudo'];?></em> (<a id="logOutButton" href="index.php?action=disconnect">se déconnecter</a>)</p>
 					<?php
 
 						if($_SESSION['type']==1){
 					?>
-							<p><a href="index.php?action=admin">Administration</a></p>
+							<p><a id="adminLinkButton" href="index.php?action=admin">Administration</a></p>
 					<?php
 						}
 					}
@@ -81,6 +81,9 @@
 			<div id="content">
 			<?= $content ?>
 			</div>
+
+			<footer>
+			</footer>
 
 		</body>
 		

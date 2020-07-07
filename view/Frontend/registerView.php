@@ -6,7 +6,7 @@
 
 <section id="registerDiv">
 
-	<div id="imgregisterSlider">
+	<div id="imgRegisterSlider">
 		<img src="public/CSS/IMG/imgSlider.png">
 	</div>
 

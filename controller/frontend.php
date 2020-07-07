@@ -1,5 +1,3 @@
-<meta charset="utf-8" />
-
 <?php
 
 
@@ -14,6 +12,7 @@ function listPosts(){
 
 	$req=$postManager->getPosts();
 
+
 	if($req ==false){
 		throw new Exception ('Impossible d\'afficher les billets');
 	}
@@ -21,22 +20,9 @@ function listPosts(){
 
 		require('view/Frontend/listPostsView.php');
 	}
+
 }
 
-
-function listPostsAdmin(){
-
-	$postManager = new \OCR\Blog\Model\PostManager();
-
-	$req=$postManager->getPosts();
-
-	if($req ==false){
-		throw new Exception ('Impossible d\'afficher les billets');
-	}
-	else{
-		require('view/Backend/adminPostView.php');
-	}
-}
 
 
 function post(){
@@ -63,6 +49,11 @@ function post(){
 }
 
 
+function addPostPage(){
+	require('view/Backend/addPostView.php');
+}
+
+
 function addNewPost($postTitle, $postContent){
 
 	$postManager= new \OCR\Blog\Model\PostManager();
@@ -74,6 +65,25 @@ function addNewPost($postTitle, $postContent){
 	}
 	else{
 		header('Location: index.php');
+	}
+}
+
+
+function modifPostPage(){
+	$postManager= new \OCR\Blog\Model\PostManager();
+
+	$article= $postManager->getPost($_GET['id']);
+
+	$resultats=$article->fetch();
+
+	if($resultats==false){
+		throw new Exception('Impossible d\'ouvrir la page');	
+	}
+	elseif($article->rowCount()==0){
+		throw new Exception('Aucun article à modifier n\'a été selectionné');	
+	}
+	else{
+		require('view/Backend/modifPostView.php');
 	}
 }
 
@@ -105,6 +115,21 @@ function deletePost(){
 	}
 	else{
 		header ('Location: index.php');
+	}
+}
+
+
+function deletePostAdmin(){
+
+	$postManager= new \OCR\Blog\Model\PostManager();
+
+	$req= $postManager->deletePost($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de supprimer le billet');
+	}
+	else{
+		header ('Location: index.php?action=adminPost');
 	}
 }
 
@@ -196,20 +221,25 @@ function deleteCom(){
 		throw new Exception('Impossible de supprimer le commentaire');
 	}
 	else{
-		if($_GET['action']=='post'){
-
-			header('Location: index.php?action=post&id='. $_GET['post']);
-		}
-		else{
-			header('Location: index.php?action=showSignalComment');
-		}
+		header('Location: index.php?action=post&id='. $_GET['post']);
 	}
 }
 
 
-function modifyCommentPage(){
-	require('view/Frontend/modifyCommentView.php');
+function deleteComAdmin(){
+
+	$commentManager= new \OCR\Blog\Model\CommentManager();
+
+	$req= $commentManager->deleteComment($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de supprimer le commentaire');
+	}
+	else{
+		header('Location: index.php?action=showSignalComment');
+	}
 }
+
 
 
 
@@ -286,4 +316,19 @@ function disconnect(){
 
 function admin(){
 	require('view/Backend/adminView.php');
+}
+
+
+function listPostsAdmin(){
+
+	$postManager = new \OCR\Blog\Model\PostManager();
+
+	$req=$postManager->getPosts();
+
+	if($req ==false){
+		throw new Exception ('Impossible d\'afficher les billets');
+	}
+	else{
+		require('view/Backend/adminPostView.php');
+	}
 }
