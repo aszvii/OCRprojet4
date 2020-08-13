@@ -43,6 +43,8 @@ class ConnectionManager extends Manager
         $db=$this->dbConnect();
 
         $req=$db->prepare ('SELECT * FROM members WHERE name=? AND password=?');
+        /*$req=$db->prepare('SELECT id, password FROM members WHERE name=?');
+        $req->execute(array($pseudo));*/
         $req->execute(array($pseudo, $pass));
 
         return $req;

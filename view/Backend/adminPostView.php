@@ -13,11 +13,11 @@
 
 
 		<table>
-			<tr>
-				<th>Date de création</th>
-				<th>Titre</th>
+			<tr id="titleTr">
+				<th id="dateTh">Date de création</th>
+				<th id="titleTh">Titre</th>
 				<th>Article</th>
-				<th>Action</th>
+				<th id="actionTh">Action</th>
 			</tr>
 <?php 
 
@@ -26,7 +26,7 @@ while($data=$req->fetch())
 ?>
 			<tr>
 				<td id="dateTable"><?php echo htmlspecialchars($data['date_creation_fr']); ?></td>
-				<td><?php echo htmlspecialchars($data['title']); ?></td>
+				<td id="titleTable"><?php echo htmlspecialchars($data['title']); ?></td>
 				<td><?php echo $postManager->cut($data['content'], $data['id']); ?></td>
 
 				<td id="actionSignalButton"><a id="adminModifPost" href="index.php?action=modifyPostPage&id=<?=$data['id']?>">Modifier</a>

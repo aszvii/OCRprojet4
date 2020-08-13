@@ -1,4 +1,4 @@
-<?php $title= 'Ajout d\'un billet'; ?>
+<?php $title= 'Ajouter un billet'; ?>
 
 <?php ob_start(); ?>
 

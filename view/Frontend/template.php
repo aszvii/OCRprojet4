@@ -37,7 +37,7 @@
 						<h2><a href="index.php">Billet Simple pour l'Alaska</a></h2>
 					</div>
 
-					<div>
+					<div id="headerButton">
 
 					<?php 
 

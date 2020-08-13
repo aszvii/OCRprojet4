@@ -40,7 +40,7 @@ function post(){
 		throw new Exception('Impossible d\'afficher la page');	
 	}
 	else if($req->rowCount()==0){
-		throw new Exception('L\'id envoyé est incorrect');
+		throw new Exception('Le billet demandé n\'existe pas');
 	}
 	else {
 		require('view/Frontend/postView.php');
@@ -76,11 +76,11 @@ function modifPostPage(){
 
 	$resultats=$article->fetch();
 
-	if($resultats==false){
+	if($article==false){
 		throw new Exception('Impossible d\'ouvrir la page');	
 	}
 	elseif($article->rowCount()==0){
-		throw new Exception('Aucun article à modifier n\'a été selectionné');	
+		throw new Exception('L\'article que vous souhaitez modifier n\'existe pas');	
 	}
 	else{
 		require('view/Backend/modifPostView.php');
@@ -134,34 +134,20 @@ function deletePostAdmin(){
 }
 
 
-function addComment($postId, $author, $comment){
+function addComment($author, $comment){
 
 	$commentManager=new  \OCR\Blog\Model\CommentManager();
 
-	$req = $commentManager->postComment($postId, $author, $comment);
+	$req = $commentManager->postComment($_GET['id'], $author, $comment);
 
 	if($req === false){
 		throw new Exception ('Impossible d\'ajouter le commentaire !');
 	}
 	else{
-		header('Location: index.php?action=post&id='. $postId);
+		header('Location: index.php?action=post&id='. $_GET['id']);
 	}
 }
 
-
-function modifComment($comment){
-
-	$commentManager=new  \OCR\Blog\Model\CommentManager();
-
-	$req = $commentManager->modifyComment($comment, $_GET['id']);
-
-	if($req==false){
-		throw new Exception('Impossible de modifier le commentaire');
-	}
-	else{
-		header('Location: index.php?action=post&id='.$_GET['post']);
-	}
-}
 
 
 function signalCom(){
@@ -208,7 +194,6 @@ function showSignal(){
 
 	}
 }
-
 
 
 function deleteCom(){
@@ -261,6 +246,7 @@ function addMember($registerName, $registerMail, $registerPassword){
 
 	elseif($verif->rowCount()==0){
 
+		//$req= $registerManager->register($registerName, $registerMail, password_hash($registerPassword, PASSWORD_DEFAULT));
 		$req= $registerManager->register($registerName, $registerMail, $registerPassword);
 
 		if($req==false){
@@ -289,21 +275,61 @@ function connection($pseudo, $pass){
 
 	$req=$connectionManager->connect($pseudo, $pass);
 
-	$resultats=$req->fetch();
-
-	if($req->rowCount()==0){
-		throw new Exception('pseudo ou mot de passe incorrect');	
+	if($req==false){
+		throw new Exception("Impossible de vous connecter");
 	}
+	
 	else{
+		$resultats=$req->fetch();
+
+		if($req->rowCount()==0){
+			throw new Exception('pseudo ou mot de passe incorrect');	
+		}
+		else{
 		
-		session_start();
-		$_SESSION['id']=$resultats['id'];
-		$_SESSION['pseudo']= $pseudo;
-		$_SESSION['type']=$resultats['type'];
+			session_start();
+			$_SESSION['id']=$resultats['id'];
+			$_SESSION['pseudo']= $pseudo;
+			$_SESSION['type']=$resultats['type'];
 		
-		header ('Location: index.php?action=listPosts');
+			header ('Location: index.php?action=listPosts');
+		}
 	}
+
 }
+
+
+/*function connection($pseudo, $pass){
+
+	$connectionManager= new \OCR\Blog\Model\ConnectionManager();
+
+	$req=$connectionManager->connect($pseudo);
+
+	$resultat=$req->fetch();
+
+	$isPasswordCorrect= password_verify($_POST['password'], $resultat['password'])
+
+	if(!$resultat){
+		throw new Exception("Mauvais identifiants");
+	}
+	
+	else{
+
+		if($isPasswordCorrect){
+
+			session_start();
+			$_SESSION['id']=$resultat['id'];
+			$_SESSION['pseudo']= $pseudo;
+			$_SESSION['type']=$resultat['type'];
+		
+			header ('Location: index.php?action=listPosts');	
+		}
+		else{
+			throw new Exception("Mot de passe incorrect");
+		}
+	}
+
+}*/
 
 
 

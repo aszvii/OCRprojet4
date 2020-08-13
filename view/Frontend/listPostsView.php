@@ -1,4 +1,4 @@
-<?php $title= 'Mon Blog'; ?>
+<?php $title= 'Blog de Jean Forteroche'; ?>
 
 
 <?php ob_start(); ?>

@@ -20,9 +20,9 @@
 
 				<form method="post" action="index.php?action=addMember">
 					<div id="registerId">
-						<label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo">
-						<label for="mail">Adresse email</label><input type="text" id="mail" name="mail">
-						<label for="password">Mot de passe</label><input type="password" id="password" name="password">
+						<p><label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo"></p>
+						<p><label for="mail">Adresse email</label><input type="text" id="mail" name="mail"></p>
+						<p><label for="password">Mot de passe</label><input type="password" id="password" name="password"></p>
 					</div>
 					<div id="registerButton">
 						<input type="submit" value="Créer un compte">

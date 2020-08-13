@@ -28,20 +28,31 @@
 
 
 
-			<title><?= $title ?></title>
+			<title>Erreur</title>
 
 		</head>
 
 
 		<body id="errorBody">
 
-			<a class="returnLink" href="index.php">Retour à l'accueil</a>
-		
+		<header id="bodyHeader">
 
+			<?php 	if(isset($_SERVER['HTTP_REFERER'])){
+			?>
+						<p class="returnLink"><a href="<?= $_SERVER['HTTP_REFERER']; ?>">Retour à la page précédente</a></p>
+			<?php 
+					}
+			?>
+			<p class="returnLink"><a href="index.php">Retour à l'accueil</a></p>
+
+		</header>	
+		
+		<div id="errorContent">
 			<img src='public/CSS/IMG/errorImg.png'/>
 
 			<p><em><?= 'ERREUR: '?></em><?= $e->getMessage(); ?></p>
 
+		</div>
 
 		</body>
 		

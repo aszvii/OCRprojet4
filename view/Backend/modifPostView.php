@@ -1,8 +1,7 @@
-<?php $title= 'Modification d\'un billet'; ?>
+<?php $title= 'Modifier un billet'; ?>
 
 <?php ob_start(); ?>
 
-<?php $post=$article->fetch(); ?>
 
 <section id="addModifPostDiv">
 
@@ -15,11 +14,11 @@
 
 	<form method="post" action="index.php?action=modifyPost&id=<?=$_GET['id']?>">
 		<div>
-			<label for="title">Titre</label><input type="text" id="title" name="title" value="<?=$post['title']?>">
+			<label for="title">Titre</label><input type="text" id="title" name="title" value="<?=$resultats['title']?>">
 		</div>
 
 		<div>
-			<label for="article">Article</label><textarea  cols=50 rows=10 id="article" name="article"><?=$post['content']?></textarea>
+			<label for="article">Article</label><textarea  cols=50 rows=10 id="article" name="article"><?=$resultats['content']?></textarea>
 		</div>
 
 		<input type="submit" value="Modifier">

@@ -10,11 +10,11 @@
 
 
 <table>
-	<tr>
-		<th>Date</th>
-		<th>Auteur</th>
+	<tr id="titleTr">
+		<th id="dateTh">Date</th>
+		<th id="titleTh">Auteur</th>
 		<th>Commentaire</th>
-		<th>Action</th>
+		<th id="actionTh">Action</th>
 	</tr>
 <?php 
 
@@ -23,12 +23,13 @@ while($data=$req->fetch())
 ?>
 	<tr>
 		<td id="dateTable"><?php echo htmlspecialchars($data['date_commentaire_fr']); ?></td>
-		<td><?php echo htmlspecialchars($data['name']); ?></td>
-		<td><?php echo htmlspecialchars($data['comment']); ?></td>
+		<td id="authorTable"><?php echo htmlspecialchars($data['name']); ?></td>
+		<!--<td><?php echo htmlspecialchars($data['comment']); ?></td>-->
+		<td><?php echo $commentManager->cut(htmlspecialchars($data['comment']), $data['post_id'], $data['comment']);?></td>
 
 		<td id="actionSignalButton"><button id="deleteSignalCom"><a href="index.php?action=deleteCommentAdmin&id=<?=$data['id']?>">Supprimer</a></button>
 									<button id="cancelSignalCom"><a href="index.php?action=cancelSignal&id=<?=$data['id']?>">Annuler</a></button>
-									<a id="signalCommentLink" href="index.php?action=post&id=<?=$data['post_id']?>">Voir le commentaire</a>
+									<a id="signalCommentLink" href="index.php?action=post&id=<?=$data['post_id']?>#<?=$data['comment']?>">Voir le commentaire</a>
 		</td> 
 	</tr>
 	

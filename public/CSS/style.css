@@ -7,10 +7,17 @@ html, body{
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+	font-family: helvetica, sans serif;
 }
 
 header{
 	padding-top: 90px;
+}
+
+@media screen and (max-width: 500px){
+	header{
+		padding-top: 110px;
+	}
 }
 
 #content{
@@ -31,7 +38,6 @@ footer{
 	position: fixed;
 	top: 0;
 	left: 0;
-	padding-left: 15px;
 	width: 100%;
 	height: 90px;
 	z-index: 900;
@@ -39,6 +45,20 @@ footer{
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+}
+
+@media screen and (max-width: 768px){
+	#divFixedMenu{
+		opacity: 1;
+	}
+}
+
+@media screen and (max-width: 500px){
+	#divFixedMenu{
+		flex-direction: column;
+		justify-content: center;
+		height: 110px;
+	}
 }
 
 #divFixedMenu:hover{
@@ -52,7 +72,16 @@ footer{
 
 
 #bookTitle{
-	width: 15%;
+	margin-left: 15px;
+	width: 35%;
+}
+
+@media screen and (max-width: 500px){
+	#bookTitle{
+		width: 100%;
+		text-align: center;
+		margin-left: 0px;
+	}
 }
 
 
@@ -60,6 +89,21 @@ footer{
 	color: black;
 }
 
+
+#headerButton{
+
+}
+
+
+@media screen and (max-width: 500px){
+	#headerButton{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		width: 100%;
+		font-weight: bold;
+	}
+}
 
 #helloMember em{
 	font-weight: bold;
@@ -77,8 +121,13 @@ footer{
 }
 
 #divFixedMenu p{
-	margin-right: 50px;
-	text-align: right;
+margin-right: 15px;
+}
+
+@media screen and (max-width: 500px){
+	#divFixedMenu p{
+		margin-left: 15px;
+	}
 }
 
 #slider{
@@ -102,6 +151,15 @@ footer{
 	flex-direction: column;
 }
 
+@media screen and (max-width: 500px){
+	#textSlider{
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
 #textSlider h1{
 	font-size: 70px;
 	font-style: italic;
@@ -110,12 +168,39 @@ footer{
 	margin-left: 15px;
 }
 
+@media screen and (max-width: 768px){
+	#textSlider h1{
+		font-size: 50px;
+	}
+}
+
+@media screen and (max-width: 500px){
+	#textSlider h1{
+		font-size: 35px;
+	}
+}
+
 #textSlider p{
 	font-size: 30px;
 	align-self: flex-end;
 	text-align: left;
 	width: 70%;
 	margin-right: 15px;
+}
+
+@media screen and (max-width: 768px){
+	#textSlider p{
+		font-size: 25px;
+	}
+}
+
+@media screen and (max-width: 500px){
+	#textSlider p{
+		font-size: 20px;
+		width: 100%;
+		text-align: center;
+		margin-right: 0px;
+	}
 }
 
 
@@ -129,13 +214,18 @@ footer{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding-left: 15px;
-	margin-right: 15px;
 }
 
 #signalComViewDiv h1{
 	margin-top: 50px;
 	align-self: center;
+}
+
+@media screen and (max-width: 750px){
+	#signalComViewDiv h1{
+		border: 2px solid black;
+		padding: 5px;
+	}
 }
 
 table{
@@ -146,41 +236,64 @@ table{
 	align-self: center;
 }
 
+
 table th{
 	border:2px solid black;
 	border-collapse: collapse;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+@media screen and (max-width: 750px){
+	table th{
+		border: none;
+		width: 100%;
+	}
 }
 
 table tr{
 	border-top: 1px solid black;
 }
 
+@media screen and (max-width: 750px){
+	table tr{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-top: 2px solid black;
+		text-align: center;
+		margin: auto;
+	}
+}
+
 table td{
 	border-right: 1px solid black;
 	min-height: 200px;
-
+	text-align: center;
+	padding: 10px;
+	word-break: break-all;
 }
 
-
-
-tr{
-	text-align: center;
-	margin: auto;
+@media screen and (max-width: 750px){
+	table td{
+		border-right: none;
+		min-height: 40px;
+	}
 }
 
 
 #deleteSignalCom{
 	color: red;
-	font-size: bold;
-	width:50%;
+	font-weight: bold;
+	width:100%;
 	align-self: center;
 	margin:0;
 }
 
 #cancelSignalCom{
 	color: blue;
-	font-size: bold;
-	width:50%;
+	font-weight: bold;
+	width: 100%;
 	align-self: center;
 	margin:0;
 }
@@ -198,6 +311,21 @@ tr{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	padding-left: 5px;
+}
+
+@media screen and (max-width: 750px){
+	#actionSignalButton{
+		flex-direction: row;
+		padding-left: 0px;
+		border-top: 1px solid RGBa(0, 0, 0, 0.4);
+		width: 100%;
+		align-items: center;
+	}
+}
+
+#signalCommentLink:hover{
+	color: black;
 }
 
 #signalCommentLink{
@@ -210,11 +338,31 @@ tr{
 
 #dateTable{
 	width: 20%;
+	font-style: italic;
 }
 
+@media screen and (max-width: 750px){
+	#dateTable{
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.1);
+		margin: 5px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
 
+#authorTable{
+	font-weight: bold;
+}
 
-
+@media screen and (max-width: 750px){
+	#titleTr{
+		background-color: RGBa(184, 143, 54, 0.5);
+		border-top: 5px solid black;
+		border-bottom: 2px solid black;
+	}
+}
 
 /*listPostsView   &   postView*/
 
@@ -223,12 +371,17 @@ tr{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding-left: 15px;
 	margin-bottom: 50px;
 }
 
-#listPostsDiv h1, #postDiv h1{
+#listPostsDiv h1{
 	font-size: 35px;
+}
+
+@media screen and (max-width: 500px){
+	#listPostsDiv h1{
+		font-size: 24px;
+	}
 }
 
 .news{
@@ -262,6 +415,12 @@ tr{
 
 .news em{
 	font-size: 19px;
+}
+
+@media screen and (max-width: 550px){
+	.news em{
+		font-size: 15px;
+	}
 }
 
 .news a:hover h3{
@@ -300,6 +459,12 @@ a{
 	font-size: 20px;
 }
 
+@media screen and (max-width: 500px){
+	#addPostLink{
+		font-size: 18px;
+	}
+}
+
 
 #readMore{
 	font-style: italic;
@@ -316,9 +481,16 @@ a{
 }
 
 .returnLink{
-	text-align: left;
-	width: 100%;
+	align-self: flex-start;
+	/*width: 100%;*/
 	font-size: 18px;
+	margin-left: 15px;
+}
+
+@media screen and (max-width: 500px){
+	.returnLink{
+		font-size: 16px;
+	}
 }
 
 .returnLink a:hover{
@@ -351,6 +523,11 @@ a{
 
 #commentContent{
 	border-bottom: 1px solid black;
+	word-break: break-all;
+}
+
+#commentContent a:hover{
+	color: black;
 }
 
 
@@ -390,6 +567,12 @@ a{
 	text-align: center;
 }
 
+@media screen and (max-width: 660px){
+	#textConnectionSlider h1, #textRegisterSlider h1{
+		font-size: 30px;
+	}
+}
+
 
 #connectionSpace, #registerSpace{
 	border: 5px solid RGBa(184, 143, 54, 0.5);
@@ -404,10 +587,29 @@ a{
 	font-size: 25px;
 }
 
+
+@media screen and (max-width: 660px){
+	#textConnectionSlider p, #textRegisterSlider p{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-size: 20px;
+	}
+}
+
+
 #textConnectionSlider input, #textRegisterSlider input{
 	margin-right: 25px;
 	margin-left: 5px;
 	height: 30px;
+}
+
+
+@media screen and (max-width: 660px){
+	#textConnectionSlider input, #textRegisterSlider input{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
 }
 
 
@@ -416,11 +618,26 @@ a{
 }
 
 #connectionId, #registerId{
+	display: flex;
 	margin-bottom: 30px;
 	color: white;
 	font-weight: bold;
 }
 
+@media screen and (max-width: 660px){
+	#connectionId, #registerId{
+		flex-direction: column;
+	}
+}
+
+
+#registerId p{
+	text-align: center;
+}
+
+#registerId label{
+	margin-right: 20px;
+}
 
 
 
@@ -440,6 +657,12 @@ a{
 	font-size: 40px;
 }
 
+@media screen and (max-width: 500px){
+	.adminSection h2{
+		font-size: 25px;
+	}
+}
+
 .adminSection a{
 	color: RGB(184, 143, 54);
 	display: flex;
@@ -456,14 +679,62 @@ a{
 /*adminPostView*/
 
 #adminPostsViewDiv{
-	padding-left: 15px;
-	margin-right: 15px;
+	
 }
 
 #listPostsAdminView{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+#listPostsAdminView h1{
+	margin-top: 50px;
+	align-self: center;
+}
+
+@media screen and (max-width: 750px){
+	#listPostsAdminView h1{
+		border: 2px solid black;
+		padding: 5px;
+	}
+}
+
+#titleTable{
+	font-weight: bold;
+}
+
+#dateTh{
+	width: 20%;
+}
+
+@media screen and (max-width: 750px){
+	#dateTh{
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.1);
+		margin-top: 2px;
+		font-style: italic;
+	}
+}
+
+#titleTh{
+	width: 20%;
+}
+
+@media screen and (max-width: 750px){
+	#titleTh{
+		width: 100%;
+	}
+}
+
+#actionTh{
+	width: 15%;
+}
+
+@media screen and (max-width: 750px){
+	#actionTh{
+		width: 100%;
+	}
 }
 
 #adminPostsViewDiv table a{
@@ -489,8 +760,8 @@ a{
 
 /*addPostView   &   modifPostView*/
 
-#addModifPostDiv{
-	padding-left: 15px;
+#addModifPostDiv form{
+	margin-left: 15px;
 	margin-right: 15px;
 }
 
@@ -500,6 +771,7 @@ a{
 
 #addModifPostDiv h1{
 	text-decoration: underline;
+	text-align: center;
 }
 
 #addModifPostDiv form label{
@@ -515,18 +787,23 @@ a{
 
 /*TEMPLATE ERROR*/
 
-#errorHtml, #errorBody{
+#errorHtml{
 	background-color: RGB(184, 143, 54);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	margin: 0;
+	padding: 0;
+}
+
+
+#bodyHeader{
+	width: 100%;
+	padding-top: 0px;
 }
 
 #errorBody{
-	margin-top: 10px;
-	width: 100%;
-	padding-left: 15px;
+	background-color: RGB(184, 143, 54);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 #errorBody img{
@@ -534,23 +811,36 @@ a{
 	margin-top: 50px;
 }
 
-#errorBody p{
+@media screen and (max-width: 550px){
+	 #errorBody img{
+	 	height: 200px;
+	 }
+}
+
+
+#errorContent{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#errorContent p{
 	font-style: italic;
 	font-weight: bold;
 	font-size: 30px;
 	margin-top: 50px;
 }
 
-#errorBody em{
-	font-style: normal;
+@media screen and (max-width: 550px){
+	 #errorContent p{
+	 	font-size: 18px;
+	 }
 }
 
-#errorBody a{
-	color: white;
-}
-
-#errorBody a:hover{
-	color: black;
+@media screen and (max-width: 350px){
+	 #errorContent p{
+	 	font-size: 15px;
+	 }
 }
 
 

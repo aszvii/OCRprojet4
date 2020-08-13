@@ -18,8 +18,8 @@
 
 				<form method="post" action="index.php?action=connection">
 					<div id="connectionId">
-						<label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo">
-						<label for="password">Mot de passe</label><input type="password" id="password" name="password">
+						<p><label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo"></p>
+						<p><label for="password">Mot de passe</label><input type="password" id="password" name="password"></p>
 					</div>
 					<div id="connectionButton">
 						<input type="submit" value="Se connecter">
@@ -31,6 +31,7 @@
 	</div>
 
 </section>
+
 <?php $content= ob_get_clean(); ?>
 
 <?php require ('view/Backend/template2.php'); ?>

@@ -21,6 +21,18 @@
             
             	    <div id="newsPara">
                         <p><?php echo $post['content']; ?></p>
+
+
+<?php   if(isset($_SESSION) && isset($_SESSION['type'])){
+            if($_SESSION['type']==1){
+
+?>              <p><em><a id="modifLink" href="index.php?action=modifyPostPage&id=<?=$_GET['id']?>">Modifier</a></em>
+                <em><a id="deleteLink" href="index.php?action=deletePost&id=<?=$_GET['id']?>">Supprimer</a></em>
+                <em><a href="index.php?action=adminPost">Voir tous les billets</a></em></p>
+<?php
+            }
+        }
+?>
                     </div>
         	</div>
 
@@ -31,7 +43,7 @@
             if(isset($_SESSION['pseudo'])){
             ?>
 
-                <form method="post" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>">
+                <form method="post" action="index.php?action=addComment&id=<?= $post['id'] ?>">
 
                     <div>
                         <label for="comment">Laissez votre commentaire</label><br/>
@@ -78,7 +90,7 @@
         }
     ?>
 
-            	           <p><?php echo htmlspecialchars($comment['comment']); ?></p></p>
+            	           <p id="<?=$comment['comment']?>"><?php echo htmlspecialchars($comment['comment']); ?></p></p>
 
                         </div>
 

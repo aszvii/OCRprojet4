@@ -30,7 +30,7 @@ try{
 
 
 		elseif($_GET['action']=='addPost'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				addPostPage();
 			}
 			else{
@@ -41,18 +41,24 @@ try{
 
 
 		elseif($_GET['action']=='addPosted'){
-			if(!empty($_POST['title']) && !empty($_POST['article'])){
-				addNewPost($_POST['title'], $_POST['article']);
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
+				if(!empty($_POST['title']) && !empty($_POST['article'])){
+					addNewPost($_POST['title'], $_POST['article']);
+				}
+				else{
+					throw new Exception('Veuillez remplir tous les champs pour ajouter un article');
+				}
 			}
 			else{
-				throw new Exception('Veuillez remplir tous les champs pour ajouter un article');
+				throw new Exception('Vous n\'avez pas les droits pour ajouter un article');
 				
 			}
+			
 		}
 
 
 		elseif($_GET['action']=='modifyPostPage'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				if(isset($_GET['id']) && $_GET['id']>0){
 					modifPostPage();
 				}
@@ -68,27 +74,30 @@ try{
 
 
 		elseif($_GET['action']=='modifyPost'){
-			if(!empty($_POST['title']) && !empty($_POST['article']) && isset($_GET['id'])){
-				modifPost($_POST['title'], $_POST['article']);
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
+				if(!empty($_POST['title']) && !empty($_POST['article']) && isset($_GET['id'])){
+					modifPost($_POST['title'], $_POST['article']);
+				}
 			}
+			
 		}
 
 
 		elseif($_GET['action']=='deletePost'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				if(isset($_GET['id'])){
 					deletePost();
 				}
 			}
 			else{
-				throw new Exception('action non autorisée');	
+				throw new Exception('Vous n\'avez pas les droits pour supprimer cet article');	
 			}
 		}
 
 
 
 		elseif($_GET['action']=='deletePostAdmin'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				if(isset($_GET['id'])){
 					deletePostAdmin();
 				}
@@ -103,18 +112,18 @@ try{
 			if(isset($_SESSION['id'])){
 				if(isset($_GET['id']) && ($_GET['id']>0)){
 					if(!empty($_POST['comment'])){
-						addComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
+						addComment($_SESSION['id'], htmlspecialchars($_POST['comment']));
 					}
 					else{
 						throw new Exception ('Tous les champs doivent être remplis');
 					}
 				}
 				else{
-					throw new Exception ('Aucun identifiant de  billet envoyés');
+					throw new Exception ('Aucun identifiant de billet envoyé');
 				}
 			}
 			else{
-				throw new Exception('action non autorisée');
+				throw new Exception('Action non autorisée');
 				
 			}
 
@@ -138,17 +147,17 @@ try{
 
 
 		elseif($_GET['action']=='showSignalComment'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				showSignal();
 			}
 			else{
-				throw new Exception('Vous n\'avez pas les droits poru accéder à cette rubrique');
+				throw new Exception('Vous n\'avez pas les droits pour accéder à cette rubrique');
 			}
 		}
 
 
 		elseif($_GET['action']=='deleteComment'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				if(isset($_GET['id'])){
 					deleteCom();
 				}
@@ -165,7 +174,7 @@ try{
 
 
 		elseif($_GET['action']=='deleteCommentAdmin'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				if(isset($_GET['id'])){
 					deleteComAdmin();
 				}
@@ -180,7 +189,7 @@ try{
 
 
 		elseif($_GET['action']=='cancelSignal'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				if(isset($_GET['id'])){
 					cancelSignal();
 				}
@@ -211,6 +220,7 @@ try{
 
 				if(filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
 					
+					//addMember($_POST['pseudo'], $_POST['mail'], $_POST['password']);
 					addMember($_POST['pseudo'], $_POST['mail'], $_POST['password']);	
 				}
 				else{
@@ -232,6 +242,7 @@ try{
 
 		elseif($_GET['action']=='connection'){
 			if (!empty($_POST['pseudo']) && !empty($_POST['password'])){
+				//connection($_POST['pseudo'], password_hash($_POST['password'], PASSWORD_DEFAULT));
 				connection($_POST['pseudo'], $_POST['password']);
 			}
 			else{
@@ -241,7 +252,7 @@ try{
 
 
 		elseif($_GET['action']=='admin'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				admin();
 			}
 			else{
@@ -250,7 +261,7 @@ try{
 		}
 
 		elseif($_GET['action']=='adminPost'){
-			if($_SESSION['type']==1){
+			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				listPostsAdmin();
 			}
 			else{
@@ -270,6 +281,5 @@ try{
 
 catch(Exception $e){
 
-	//echo 'Erreur: ' . $e->getMessage();
 	require('view/Frontend/templateError.php');
 }
