@@ -246,8 +246,7 @@ function addMember($registerName, $registerMail, $registerPassword){
 
 	elseif($verif->rowCount()==0){
 
-		//$req= $registerManager->register($registerName, $registerMail, password_hash($registerPassword, PASSWORD_DEFAULT));
-		$req= $registerManager->register($registerName, $registerMail, $registerPassword);
+		$req= $registerManager->register($registerName, $registerMail, password_hash($registerPassword, PASSWORD_DEFAULT));
 
 		if($req==false){
 			throw new Exception('Impossible de créer le compte');
@@ -269,37 +268,9 @@ function connect(){
 }
 
 
+
+
 function connection($pseudo, $pass){
-
-	$connectionManager= new \OCR\Blog\Model\ConnectionManager();
-
-	$req=$connectionManager->connect($pseudo, $pass);
-
-	if($req==false){
-		throw new Exception("Impossible de vous connecter");
-	}
-	
-	else{
-		$resultats=$req->fetch();
-
-		if($req->rowCount()==0){
-			throw new Exception('pseudo ou mot de passe incorrect');	
-		}
-		else{
-		
-			session_start();
-			$_SESSION['id']=$resultats['id'];
-			$_SESSION['pseudo']= $pseudo;
-			$_SESSION['type']=$resultats['type'];
-		
-			header ('Location: index.php?action=listPosts');
-		}
-	}
-
-}
-
-
-/*function connection($pseudo, $pass){
 
 	$connectionManager= new \OCR\Blog\Model\ConnectionManager();
 
@@ -307,7 +278,7 @@ function connection($pseudo, $pass){
 
 	$resultat=$req->fetch();
 
-	$isPasswordCorrect= password_verify($_POST['password'], $resultat['password'])
+	$isPasswordCorrect= password_verify($pass, $resultat['password']);                  
 
 	if(!$resultat){
 		throw new Exception("Mauvais identifiants");
@@ -329,7 +300,7 @@ function connection($pseudo, $pass){
 		}
 	}
 
-}*/
+}
 
 
 

@@ -15,7 +15,7 @@
 
 			<div class="news">
             	   <h3>
-                	   <?php echo htmlspecialchars($post['title']); ?>
+                	   <?php echo $post['title']; ?>
                		   <em>le <?php echo $post['date_creation_fr']; ?></em>
             	   </h3>
             
@@ -30,8 +30,12 @@
                 <em><a id="deleteLink" href="index.php?action=deletePost&id=<?=$_GET['id']?>">Supprimer</a></em>
                 <em><a href="index.php?action=adminPost">Voir tous les billets</a></em></p>
 <?php
+
             }
+
         }
+
+    $req->closeCursor();
 ?>
                     </div>
         	</div>
@@ -90,14 +94,21 @@
         }
     ?>
 
-            	           <p id="<?=$comment['comment']?>"><?php echo htmlspecialchars($comment['comment']); ?></p></p>
+            	           <p id="<?=$comment['comment']?>"><?php echo $comment['comment']; ?></p></p>
 
                         </div>
 
                 
    	<?php
+
         	}
+
         }
+
+
+    $comments->closeCursor();
+
+
 
    	?>
 

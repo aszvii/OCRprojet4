@@ -38,14 +38,12 @@ class RegisterManager extends Manager
 class ConnectionManager extends Manager
 {
 
-    public function connect($pseudo, $pass){
+    public function connect($pseudo){
         
         $db=$this->dbConnect();
 
-        $req=$db->prepare ('SELECT * FROM members WHERE name=? AND password=?');
-        /*$req=$db->prepare('SELECT id, password FROM members WHERE name=?');
-        $req->execute(array($pseudo));*/
-        $req->execute(array($pseudo, $pass));
+        $req=$db->prepare('SELECT * FROM members WHERE name=?');
+        $req->execute(array($pseudo));
 
         return $req;
     }

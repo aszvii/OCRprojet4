@@ -22,7 +22,8 @@
 			<script>
     			console.log("hello");
       			tinymce.init({
-        			selector: 'textarea#article'
+        			selector: 'textarea#article',
+        			language : "fr_FR"
       			});
 			</script>
 

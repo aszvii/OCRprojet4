@@ -29,7 +29,7 @@ while($data=$req->fetch())
 
 		<td id="actionSignalButton"><button id="deleteSignalCom"><a href="index.php?action=deleteCommentAdmin&id=<?=$data['id']?>">Supprimer</a></button>
 									<button id="cancelSignalCom"><a href="index.php?action=cancelSignal&id=<?=$data['id']?>">Annuler</a></button>
-									<a id="signalCommentLink" href="index.php?action=post&id=<?=$data['post_id']?>#<?=$data['comment']?>">Voir le commentaire</a>
+									<a id="signalCommentLink" href="index.php?action=post&id=<?=$data['post_id']?>#<?=$data['comment']?>">Voir</a>
 		</td> 
 	</tr>
 	

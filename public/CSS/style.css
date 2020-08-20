@@ -271,7 +271,7 @@ table td{
 	min-height: 200px;
 	text-align: center;
 	padding: 10px;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 @media screen and (max-width: 750px){
@@ -330,6 +330,7 @@ table td{
 
 #signalCommentLink{
 	text-decoration: underline;
+	word-break: keep-all;
 }
 
 #actionSignalButton button{
@@ -406,7 +407,7 @@ table td{
 	border: 2.5px solid RGB(184, 143, 54) ;
 	box-shadow: 4px 4px 4px grey;
 	font-size: 25px;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 #newsPara p{
@@ -523,7 +524,7 @@ a{
 
 #commentContent{
 	border-bottom: 1px solid black;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 #commentContent a:hover{

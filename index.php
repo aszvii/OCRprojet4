@@ -220,7 +220,6 @@ try{
 
 				if(filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
 					
-					//addMember($_POST['pseudo'], $_POST['mail'], $_POST['password']);
 					addMember($_POST['pseudo'], $_POST['mail'], $_POST['password']);	
 				}
 				else{
@@ -242,7 +241,6 @@ try{
 
 		elseif($_GET['action']=='connection'){
 			if (!empty($_POST['pseudo']) && !empty($_POST['password'])){
-				//connection($_POST['pseudo'], password_hash($_POST['password'], PASSWORD_DEFAULT));
 				connection($_POST['pseudo'], $_POST['password']);
 			}
 			else{
