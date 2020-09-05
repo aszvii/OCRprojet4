@@ -5,6 +5,7 @@ namespace OCR\Blog\Model;
 require_once('model/Manager.php');
 
 
+
 class RegisterManager extends Manager
 {
 

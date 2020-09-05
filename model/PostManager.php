@@ -65,24 +65,4 @@ class PostManager extends Manager
 	}
 
 
-
-	
-	public function cut($post, $id){
-    	//nombre de caractères à afficher
-    	$max_caracteres=250;
-    	// Test si la longueur du texte dépasse la limite
-    	if (strlen($post)>$max_caracteres)
-    	{   
-        	// Séléction du maximum de caractères
-        	$post = substr($post, 0, $max_caracteres);
-        	// Récupération de la position du dernier espace (afin déviter de tronquer un mot)
-        	$position_space = strrpos($post, " ");   
-        	$post = substr($post, 0, $position_space); 
-
-        	$post= $post. " <a id='readMore' href='index.php?action=post&id=".$id."'>[Lire la suite]</a>";
-    	}
-    	return $post;
-	}
-
-
 }

@@ -4,6 +4,8 @@ namespace OCR\Blog\Model;
 
 require_once('model/Manager.php');
 
+
+
 class CommentManager extends Manager
 {
 
@@ -92,23 +94,5 @@ class CommentManager extends Manager
 
 	}
 
-
-
-	public function cut($comment, $id, $commentId){
-    	//nombre de caractères à afficher
-    	$max_caracteres=250;
-    	// Test si la longueur du texte dépasse la limite
-    	if (strlen($comment)>$max_caracteres)
-    	{   
-        	// Séléction du maximum de caractères
-        	$comment = substr($comment, 0, $max_caracteres);
-        	// Récupération de la position du dernier espace (afin déviter de tronquer un mot)
-        	$position_space = strrpos($comment, " ");   
-        	$comment = substr($comment, 0, $position_space); 
-
-        	$comment= $comment. " <a id='readMore' href='index.php?action=post&id=".$id."#".$commentId."'>[Lire la suite]</a>";
-    	}
-    	return $comment;
-	}
 
 }

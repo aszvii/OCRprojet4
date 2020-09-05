@@ -5,6 +5,7 @@ if(!isset($_SESSION)){
 }
 
 require('controller/frontend.php');
+require('controller/backend.php');
 
 
 
@@ -24,7 +25,7 @@ try{
 				post();
 			}
 			else{
-				throw new Exception('Aucun identifiants de billets renvoyés');
+				throw new Exception('Aucun identifiants de billets renvoyé');
 			}
 		}
 
@@ -87,6 +88,9 @@ try{
 			if(isset($_SESSION['type']) && ($_SESSION['type']==1)){
 				if(isset($_GET['id'])){
 					deletePost();
+				}
+				else{
+					throw new Exception('Aucun id de billet envoyé');		
 				}
 			}
 			else{

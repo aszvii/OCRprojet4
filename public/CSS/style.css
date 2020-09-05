@@ -7,7 +7,7 @@ html, body{
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	font-family: helvetica, sans serif;
+	font-family: helvetica, 'sans serif';
 }
 
 header{
@@ -271,7 +271,7 @@ table td{
 	min-height: 200px;
 	text-align: center;
 	padding: 10px;
-	word-break: break-word;
+	word-break: normal;
 }
 
 @media screen and (max-width: 750px){
@@ -407,7 +407,7 @@ table td{
 	border: 2.5px solid RGB(184, 143, 54) ;
 	box-shadow: 4px 4px 4px grey;
 	font-size: 25px;
-	word-break: break-word;
+	word-break: normal;
 }
 
 #newsPara p{
@@ -524,7 +524,7 @@ a{
 
 #commentContent{
 	border-bottom: 1px solid black;
-	word-break: break-word;
+	word-break: normal;
 }
 
 #commentContent a:hover{

@@ -62,37 +62,38 @@
            <?php
            }
            ?> 
+
                     <div id="postCommentsContent">
-    <?php
-        if($comments->rowCount()==0){
-            echo 'Soyez le premier à commenter cet article';
-        }
-        else{
+            <?php
+                if($comments->rowCount()==0){
+                    echo 'Soyez le premier à commenter cet article';
+                }
+                else{
 
-        	while ($comment = $comments->fetch())
-        	{
+        	       while ($comment = $comments->fetch())
+        	       {
 
-    ?>
+            ?>
 
             	    
                         <div id="commentContent">
                             <p><strong><?php echo htmlspecialchars($comment['name']); ?></strong> le <?php echo $comment['date_commentaire_fr']; ?>
-    <?php 
-        if(isset($_SESSION['id'])){
-    ?>
+            <?php 
+                if(isset($_SESSION['id'])){
+            ?>
                             <a id="signalLink" href="index.php?action=signalComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(signaler)</a>
-    <?php
-        }
-    ?>
+            <?php
+                }
+            ?>
 
 
-    <?php
-        if(isset($_SESSION['id']) && $_SESSION['type']==1){
-    ?>
+            <?php
+                if(isset($_SESSION['id']) && $_SESSION['type']==1){
+            ?>
                             <a id="deleteLink" href="index.php?action=deleteComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(Supprimer)</a>
-    <?php
-        }
-    ?>
+            <?php
+                }
+            ?>
 
             	           <p id="<?=$comment['comment']?>"><?php echo $comment['comment']; ?></p></p>
 

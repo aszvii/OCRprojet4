@@ -1,3 +1,5 @@
+<?php require('public/PHP/cut.php');?>
+
 <?php $title= 'Blog de Jean Forteroche'; ?>
 
 
@@ -23,7 +25,7 @@ while($data=$req->fetch())
 
 
 			<div id="newsPara">
-				<p><?=$postManager->cut($data['content'], $data['id']);?></p>
+				<p><?= cutPost($data['content'], $data['id']);?></p>
 				
 				<p><em><a href="index.php?action=post&id=<?=$data['id']?>">Commenter</a></em>
 
@@ -48,17 +50,20 @@ $req->closeCursor();
 
 ?>
 
-<?php if(isset($_SESSION) && isset($_SESSION['type'])){
-		if($_SESSION['type']==1){
+<?php 	if(isset($_SESSION) && isset($_SESSION['type'])){
+			if($_SESSION['type']==1){
 
-	?>
-
-	<p id="addPostLink"><a href="index.php?action=addPost">Ajouter un billet</a></p>
-<?php
-}
-}
 ?>
+
+			<p id="addPostLink"><a href="index.php?action=addPost">Ajouter un billet</a></p>
+
+<?php
+			}
+		}
+?>
+
 </section>
+
 <?php $content= ob_get_clean(); ?>
 
 <?php require ('template.php'); ?>

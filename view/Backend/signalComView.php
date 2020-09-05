@@ -1,3 +1,5 @@
+<?php require('public/PHP/cut.php'); ?>
+
 <?php $title= 'Commentaires Signalés'; ?>
 
 
@@ -24,8 +26,7 @@ while($data=$req->fetch())
 	<tr>
 		<td id="dateTable"><?php echo htmlspecialchars($data['date_commentaire_fr']); ?></td>
 		<td id="authorTable"><?php echo htmlspecialchars($data['name']); ?></td>
-		<!--<td><?php echo htmlspecialchars($data['comment']); ?></td>-->
-		<td><?php echo $commentManager->cut(htmlspecialchars($data['comment']), $data['post_id'], $data['comment']);?></td>
+		<td><?php echo cutComment($data['comment'], $data['post_id'], $data['comment']);?></td>
 
 		<td id="actionSignalButton"><button id="deleteSignalCom"><a href="index.php?action=deleteCommentAdmin&id=<?=$data['id']?>">Supprimer</a></button>
 									<button id="cancelSignalCom"><a href="index.php?action=cancelSignal&id=<?=$data['id']?>">Annuler</a></button>

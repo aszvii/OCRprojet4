@@ -1,3 +1,5 @@
+<?php require('public/PHP/cut.php');?>
+
 <?php $title= 'Liste des billets (admin)'; ?>
 
 
@@ -27,7 +29,7 @@ while($data=$req->fetch())
 			<tr>
 				<td id="dateTable"><?php echo htmlspecialchars($data['date_creation_fr']); ?></td>
 				<td id="titleTable"><?php echo htmlspecialchars($data['title']); ?></td>
-				<td><?php echo $postManager->cut($data['content'], $data['id']); ?></td>
+				<td><?php echo cutPost($data['content'], $data['id']); ?></td>
 
 				<td id="actionSignalButton"><a id="adminModifPost" href="index.php?action=modifyPostPage&id=<?=$data['id']?>">Modifier</a>
 									<a id="adminDeletePost" href="index.php?action=deletePostAdmin&id=<?=$data['id']?>">Supprimer</a>
